@@ -22,31 +22,53 @@ export const useLoginStore = defineStore("login", {
         }),
       });
     },
-    async login(userCredentials) {
+     login(userCredentials) {
       /**
        * This is a fake login, you can remove this if
        */
-      if (
+      /* if (
         userCredentials.email === "admin" &&
         userCredentials.password === "admin"
       ) {
         return await this.fakeLogin();
       }
-
+ */
       return api
-        .post("/login", userCredentials)
-        .then(async (response) => {
-          await this.setToken(response.token);
-          await this.setUserData(response.data);
+      //.post("/login", userCredentials)
+      .post("api/auth/login", userCredentials)
+      //.then(async (response) => {
+        .then( (response) => {
+         /*  await this.setToken(response.token);
+          await this.setUserData(response.data); */
+          // this.setToken(response.token);
+         //  this.setUserData(response.data);
 
-          return response.data;
+            this.setToken(makeString(20));
+            this.setUserData({
+             id: 1,
+             typeUser: UserTypes.ADMINISTRATOR,
+             userName: "Admin",
+           });
+     
+           return {
+             data: {
+               userType: UserTypes.ADMINISTRATOR,
+             },
+           };//response.data;
         })
-        .catch((error) => error.response);
+        //.catch((error) => error.response);
+        /* .catch((err) => {
+          console.log(commit)
+          return Promise.reject(err)
+        }) */
+        .catch((err) => {
+          return Promise.reject(err)
+        })
     },
     /**
      * This is a fake login, you can remove this method
      */
-    async fakeLogin() {
+    /* async fakeLogin() {
       await this.setToken(makeString(20));
       await this.setUserData({
         id: 1,
@@ -59,6 +81,6 @@ export const useLoginStore = defineStore("login", {
           userType: UserTypes.ADMINISTRATOR,
         },
       };
-    },
+    }, */
   },
 });

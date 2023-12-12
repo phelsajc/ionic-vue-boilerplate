@@ -1,5 +1,6 @@
 <template>
-  <base-layout page-default-back-link="/home" :show-menu-button="false">
+  <base-layout page-default-back-link="/home" :show-menu-button="false"
+    :show-tool-bar-menu="true">
     <ion-img src="assets/vectors/404.svg"> </ion-img>
     <ion-item lines="none">
       <ion-text color="primary" class="mb-3">

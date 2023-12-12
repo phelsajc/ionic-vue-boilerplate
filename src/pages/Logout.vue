@@ -32,7 +32,8 @@ function logout() {
     await Preferences.clear();
     userStore.cleanUserData();
     emitter.emit("logged");
-    await router.push({ name: "home" });
+    //await router.push({ name: "home" });
+    await router.push({ name: "login" });
   }, 1500);
 }
 </script>

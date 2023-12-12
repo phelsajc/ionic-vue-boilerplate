@@ -11,12 +11,16 @@ export default function () {
    * @param {boolean} reload
    * @returns
    */
-  function redirectTo(userTypeId, routeParams, reload = false) {
+  function redirectTo(userTypeId, routeParams, reload = false) { 
     if (!reload) {
       router.push({
         name: HomeRoutesByUser[userTypeId] || "logout",
         params: routeParams,
       });
+      console.log('reload')
+      console.log(reload)
+      console.log(routeParams)
+      console.log(HomeRoutesByUser[userTypeId])
       return;
     }
 

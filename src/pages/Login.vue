@@ -1,7 +1,5 @@
 <template>
   <base-layout
-    page-default-back-link="/home"
-    :show-menu-button="false"
   >
     <ion-row>
       <ion-col size="12">
@@ -13,7 +11,7 @@
         <ion-item class="form-field">
           <ion-icon slot="start" :icon="Icon.mail"></ion-icon>
           <ion-input
-            v-model="fields.email"
+            v-model="fields.username"
             clear-input
             required
             label="E-mail"
@@ -22,10 +20,10 @@
             tabindex="1"
             inputmode="email"
             placeholder="admin"
-            @input="errorMessages.email = ''"
+            @input="errorMessages.username = ''"
           ></ion-input>
         </ion-item>
-        <error-message :text="errorMessages.email" />
+        <error-message :text="errorMessages.username" />
       </ion-col>
       <ion-col size="12">
         <ion-item class="form-field">
@@ -56,20 +54,20 @@
       <ion-col size="12">
         <Button
           color="primary"
-          text="Login"
+          text="Login NOw"
           :icon="Icon.enterOutline"
           :is-loading="loading"
           @click="loginUser()"
         />
       </ion-col>
     </ion-row>
-    <ion-row class="ion-text-center">
+    <!-- <ion-row class="ion-text-center">
       <ion-col size="12">
         <ion-text color="tertiary" class="pointer" @click="redirectToRecoveryPassword()">
           Forgot password?
         </ion-text>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
   </base-layout>
 </template>
 
@@ -86,7 +84,9 @@ import {
 } from "@ionic/vue";
 
 import { useRouter } from "vue-router";
-import { ref } from "vue";
+import { ref,onMounted  } from "vue";
+//
+
 
 import Button from "../components/Button.vue";
 import Image from "../components/Image.vue";
@@ -108,35 +108,55 @@ const Icon = ref({
 });
 
 const fields = ref({
-  email: "admin",
+  username: "admin",
   password: "admin",
 });
 
 const errorMessages = ref({
-  email: "",
+  username: "",
   password: "",
 });
 
+onMounted(() => {
+  
+})
+
+
 const loading = ref(false);
 
-function loginUser() {
+  async function loginUser() {
   if (!validateFields()) return;
 
   loading.value = true;
 
-  userLogin(fields.value)
+  try {
+    
+    await userLogin(fields.value)
     .then(() => {
       emitter.emit("logged");
-    })
-    .finally(() => {
+    })/* .catch((err) => {
+        console.log("Something was wrong on login", "danger", "top");
+        alert("Something was wrong on login", "danger", "top");
+        return Promise.reject(err);
+        }) */.finally(() => {
       loading.value = false;
-    });
+        })
+  } catch (error) {
+    alert(0)
+  }
+
+      /* .catch((ex) => {
+        alert("Something was wrong on login", "danger", "top");
+      }); */
+    /* .finally(() => {
+      loading.value = false;
+    }); */
 }
 function validateFields() {
   let valid = true;
 
-  if (!fields.value.email) {
-    errorMessages.value.email = "Email invalid";
+  if (!fields.value.username) {
+    errorMessages.value.username = "Email invalid";
     valid = false;
   }
 

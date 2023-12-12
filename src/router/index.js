@@ -4,9 +4,13 @@ import client from "./authenticated/client";
 import admin from "./authenticated/admin";
 
 const routes = [
-  {
+  /* {
     path: "/",
     redirect: "/home",
+  }, */
+  {
+    path: "/",
+    redirect: "/login",
   },
   {
     path: "/home",

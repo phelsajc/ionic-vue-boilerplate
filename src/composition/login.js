@@ -7,26 +7,26 @@ export default function () {
   const { redirectTo } = redirectToHome();
   const loginStore = useLoginStore();
 
-  async function userLogin(userCredentials) {
+   async function userLogin(userCredentials) {
     const data = {
-      email: userCredentials.email,
+      username: userCredentials.username,
       password: userCredentials.password,
     };
 
-    loginStore
+    await loginStore
       .login(data)
       .then((response) => {
         openToast("Logged with success", "success", "top");
-
+        /* console.log(response) */
         redirectTo(response.data.userType, {
           anyCustomParams: response.customParams,
         });
 
-        return Promise.resolve();
+       // return Promise.resolve();
       })
       .catch((ex) => {
         openToast("Something was wrong on login", "danger", "top");
-        Promise.reject(ex);
+       return Promise.reject(ex);
       });
   }
 

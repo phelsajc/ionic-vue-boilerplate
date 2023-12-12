@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-buttons slot="start">
+        <ion-buttons slot="start" v-if="showToolBarMenu">
           <div v-if="pageDefaultBackLink">
             <ion-back-button
               v-if="!ignoreHistory"
@@ -66,6 +66,10 @@ const props = defineProps({
   },
   className: {
     type: String,
+    required: false,
+  },
+  showToolBarMenu: { //my custom
+    type: Boolean,
     required: false,
   },
 });

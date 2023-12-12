@@ -3,6 +3,7 @@
     page-title="Contact"
     page-default-back-link="/home"
     :show-menu-button="false"
+    :show-tool-bar-menu="true"
   >
     <ion-row>
       <ion-col size="12">
