@@ -11,6 +11,8 @@ import {
 
 import UserTypes from '../enums/UserTypes';
 
+import HomeRoutesByUser from "../enums/HomeRoutesByUser";
+
 export const useMenuStore = defineStore('menu', {
   state: () => ({
     /**
@@ -19,34 +21,44 @@ export const useMenuStore = defineStore('menu', {
    */
   publicItems: [
     {
-      title: "Contact",
+      title: "Contact 1",
       url: "/contact",
       icon: call,
     },
     {
-      title: "Not found",
+      title: "Not found 1",
       url: "/any-router-that-dont-exists",
       icon: alertCircle,
     },
     {
-      title: "Not authorized",
+      title: "Not authorized 1",
       url: "/not-authorized",
       icon: nuclear,
     },
     {
+      title: "Home",
+      url: "/home",
+      icon: home,
+    },
+    {
       title: "Division",
       type: 2,
+    },
+    {
+      title: "Dashboard",
+      url: 'admin/dashboard' ,
+      icon: home, 
     },
   ],
   /**
    * These items will only be shown when the user is not logged in
    */
   withoutAuth: [
-    {
+    /* {
       title: "Home",
       url: "/home",
       icon: home,
-    },
+    }, */
     {
       title: "Division",
       type: 2,
@@ -71,7 +83,7 @@ export const useMenuStore = defineStore('menu', {
    */
   needAuth: [
     {
-      title: "Logout",
+      title: "Logout 1",
       url: "/logout",
       icon: power,
     },

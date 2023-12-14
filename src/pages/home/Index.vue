@@ -1,6 +1,7 @@
 <template>
-  <base-layout>
-    <h2>Home</h2>
+<base-layout :show-menu-button="true"
+    :show-tool-bar-menu="true">
+    <h2>Home1</h2>
     <ion-grid>
       <ion-row>
         <ion-col size="12">

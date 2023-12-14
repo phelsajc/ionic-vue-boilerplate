@@ -42,7 +42,12 @@ router.beforeEach(async (to, from, next) => {
     _userType = userType;
   }
 
-  if (["login", "home", "register"].includes(to.name) && user.value) {
+  /* if (["login", "home", "register"].includes(to.name) && user.value) {
+    next({ name: HomeRoutesByUser[_userType] });
+    return;
+  } */
+
+  if (["login", "register"].includes(to.name) && user.value) {
     next({ name: HomeRoutesByUser[_userType] });
     return;
   }

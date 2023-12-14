@@ -5,6 +5,12 @@ import UserTypes from "../enums/UserTypes";
 import { makeString } from "../utils";
 
 export const useLoginStore = defineStore("login", {
+  id: 'auth',
+  state: () => ({
+    // initialize state from local storage to enable user to stay logged in
+    user: JSON.parse(localStorage.getItem('user')),
+    returnUrl: null
+  }),
   actions: {
     async setToken(token) {
       await Preferences.set({
@@ -22,39 +28,53 @@ export const useLoginStore = defineStore("login", {
         }),
       });
     },
-     login(userCredentials) {
+    async login(userCredentials) {
       /**
        * This is a fake login, you can remove this if
        */
-      /* if (
-        userCredentials.email === "admin" &&
-        userCredentials.password === "admin"
-      ) {
-        return await this.fakeLogin();
-      }
- */
+      /* 
+            if (
+              userCredentials.email === "admin" &&
+              userCredentials.password === "admin"
+            ) {
+              return await this.fakeLogin();
+            }
+      */
       return api
-      //.post("/login", userCredentials)
-      .post("api/auth/login", userCredentials)
-      //.then(async (response) => {
-        .then( (response) => {
-         /*  await this.setToken(response.token);
-          await this.setUserData(response.data); */
+        //.post("/login", userCredentials)
+        .post("api/auth/login", userCredentials)
+        //.then(async (response) => {
+        .then(async (response) => {
+          /*  await this.setToken(response.token);
+           await this.setUserData(response.data); */
           // this.setToken(response.token);
-         //  this.setUserData(response.data);
+          //  this.setUserData(response.data);
 
-            this.setToken(makeString(20));
-            this.setUserData({
-             id: 1,
-             typeUser: UserTypes.ADMINISTRATOR,
-             userName: "Admin",
-           });
-     
-           return {
-             data: {
-               userType: UserTypes.ADMINISTRATOR,
-             },
-           };//response.data;
+          await this.setToken(makeString(20));
+          await this.setUserData({
+            id: 1,
+            typeUser: UserTypes.ADMINISTRATOR,
+            userName: "Admin",
+          });
+          /* await this.setUserData({
+            id: 2,
+            typeUser: UserTypes.CLIENT,
+            userName: "Client",
+          }); */
+          // update pinia state
+          this.user = response;
+          localStorage.setItem('user', JSON.stringify(response));
+
+          return {
+            data: {
+              userType: UserTypes.ADMINISTRATOR,
+            },
+          };
+          /* return {
+                      data: {
+                        userType: UserTypes.CLIENT,
+                      },
+                    }; */
         })
         //.catch((error) => error.response);
         /* .catch((err) => {

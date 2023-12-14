@@ -2,8 +2,8 @@
   <ion-menu content-id="main-content" type="overlay">
     <ion-header>
       <ion-toolbar class="welcome-container" color="primary">
-        <span>Welcome {{ userName }}</span>
-        <Image style="width: 50px" src="assets/icon/logo.png" />
+    <span>Welcome {{ userName }} </span>
+      <!--   <Image style="width: 50px" src="assets/icon/logo.png" /> -->
       </ion-toolbar>
     </ion-header>
     <ion-content>
@@ -77,15 +77,21 @@ import {
   IonToolbar,
 } from "@ionic/vue";
 
-import { onBeforeUnmount, onMounted, ref, computed } from "vue";
+import { onBeforeUnmount, onMounted, ref, computed, reactive } from "vue";
 
 import { useRouter } from "vue-router";
+import { storeToRefs } from 'pinia';
 
 import { Preferences } from "@capacitor/preferences";
 import { useMenuStore } from "../store/menu";
 import { useUserStore } from "../store/user";
 import emitter from "../plugins/emitter";
 import Image from "../components/Image.vue";
+
+import { useLoginStore } from '@/store/login';
+
+const authStore = useLoginStore();
+const { user } = storeToRefs(authStore);
 
 const menuStore = useMenuStore();
 const userStore = useUserStore();
@@ -100,7 +106,7 @@ const getUserName = computed(() => userStore.getUserName);
 const selectedIndex = ref(0);
 const isLoggedIn = ref(false);
 const router = useRouter();
-const userName = ref("Guest");
+const userName = ref(user.value.data.name);// ref("Guest");
 
 const Icon = ref({
   build,
@@ -123,13 +129,15 @@ async function handleLogin() {
 
 onMounted(async () => {
   emitter.on("logged", handleLogin);
-
+  console.log("is logged: ",isLoggedIn.value)
   await mountMenu();
   await fillUserName();
+  console.log(user.value.data.name)
 });
 
 onBeforeUnmount(async () => {
   await mountMenu();
+  await fillUserName();
   emitter.off("logged", handleLogin);
 });
 
@@ -166,10 +174,10 @@ function redirect(index, menuItem) {
 
 async function fillUserName() {
   const name = await getUserName.value;
-
+  console.log(name.content)
   if (!name) return;
 
-  userName.value = name.split(" ")[0] || "Guest";
+  //userName.value =  name.split(" ")[0] || "Guest";
 }
 </script>
 
