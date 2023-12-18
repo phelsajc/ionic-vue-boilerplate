@@ -29,39 +29,18 @@ export const useLoginStore = defineStore("login", {
       });
     },
     async login(userCredentials) {
-      /**
-       * This is a fake login, you can remove this if
-       */
-      /* 
-            if (
-              userCredentials.email === "admin" &&
-              userCredentials.password === "admin"
-            ) {
-              return await this.fakeLogin();
-            }
-      */
+      console.log('234 response')
       return api
-        //.post("/login", userCredentials)
-        .post("api/auth/login", userCredentials)
-        //.then(async (response) => {
+        .post("auth/login", userCredentials)
         .then(async (response) => {
-          /*  await this.setToken(response.token);
-           await this.setUserData(response.data); */
-          // this.setToken(response.token);
-          //  this.setUserData(response.data);
-
-          await this.setToken(makeString(20));
+          console.log('response')
+          console.log(response.data.access_token)
+          await this.setToken(response.data.access_token);
           await this.setUserData({
             id: 1,
             typeUser: UserTypes.ADMINISTRATOR,
             userName: "Admin",
           });
-          /* await this.setUserData({
-            id: 2,
-            typeUser: UserTypes.CLIENT,
-            userName: "Client",
-          }); */
-          // update pinia state
           this.user = response;
           localStorage.setItem('user', JSON.stringify(response));
 
@@ -70,18 +49,9 @@ export const useLoginStore = defineStore("login", {
               userType: UserTypes.ADMINISTRATOR,
             },
           };
-          /* return {
-                      data: {
-                        userType: UserTypes.CLIENT,
-                      },
-                    }; */
         })
-        //.catch((error) => error.response);
-        /* .catch((err) => {
-          console.log(commit)
-          return Promise.reject(err)
-        }) */
         .catch((err) => {
+          console.log('err response')
           return Promise.reject(err)
         })
     },

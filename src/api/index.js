@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Preferences } from "@capacitor/preferences";
 
-const baseURL = "https://station_census.rivermedcenter.net/";//process.env.VUE_APP_API_URL;
+const baseURL = "https://station_census.rivermedcenter.net/api/";//process.env.VUE_APP_API_URL;
 //const baseURL = 'https://pxwaitlist.rivermedcenter.net/api';//process.env.VUE_APP_API_URL;
 
 

@@ -55,9 +55,15 @@ const routes = [
     component: () => import("../pages/Error404.vue"),
   },
   {
-    path: "/stations",
+    path: "/stations:propKey*",
+    //path: "/stations",
     name: "stations",
     component: () => import("../modal/station.vue"),
+    //props: (route) => ({ propKey: route.params.propKey }),
+    /* props: (route) => ({
+        ...route.params
+    }) */
+    //props:true,
   },
 ];
 
