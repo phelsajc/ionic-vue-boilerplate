@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { IonApp, IonRouterOutlet, IonSplitPane } from "@ionic/vue";
+/* import { IonApp, IonRouterOutlet, IonSplitPane } from "@ionic/vue"; */
 import Menu from "./components/Menu.vue";
 import { onMounted, ref} from "vue";
 import { Preferences } from "@capacitor/preferences";

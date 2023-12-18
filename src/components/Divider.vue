@@ -6,9 +6,7 @@
   </ion-row>
 </template>
 
-<script setup>
-import { IonCol, IonRow } from "@ionic/vue";
-</script>
+
 
 <style scoped>
 .separator {

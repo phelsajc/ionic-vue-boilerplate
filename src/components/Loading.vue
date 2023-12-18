@@ -10,7 +10,6 @@
 </template>
 
 <script setup>
-import { IonSpinner } from "@ionic/vue";
 import { defineProps } from "vue";
 
 defineProps({

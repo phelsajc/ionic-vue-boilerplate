@@ -54,6 +54,11 @@ const routes = [
     name: "not-found",
     component: () => import("../pages/Error404.vue"),
   },
+  {
+    path: "/stations",
+    name: "stations",
+    component: () => import("../modal/station.vue"),
+  },
 ];
 
 const router = createRouter({

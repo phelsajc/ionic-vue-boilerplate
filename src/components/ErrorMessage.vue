@@ -5,7 +5,6 @@
 </template>
 
 <script setup>
-import { IonText } from "@ionic/vue";
 import { defineProps } from "vue";
 
 defineProps({

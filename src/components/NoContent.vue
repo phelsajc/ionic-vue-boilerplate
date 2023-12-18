@@ -6,7 +6,6 @@
 </template>
 
 <script setup>
-import { IonImg, IonText } from "@ionic/vue";
 import { defineProps } from "vue";
 
 defineProps({

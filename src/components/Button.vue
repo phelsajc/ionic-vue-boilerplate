@@ -30,13 +30,6 @@
 </template>
 
 <script setup>
-import {
-  IonButton,
-  IonLabel,
-  IonIcon,
-  IonSpinner,
-  IonRippleEffect,
-} from "@ionic/vue";
 import { defineProps, computed, toRefs } from "vue";
 import { useRouter } from "vue-router";
 

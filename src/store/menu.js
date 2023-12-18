@@ -45,7 +45,7 @@ export const useMenuStore = defineStore('menu', {
       type: 2,
     },
     {
-      title: "Dashboard",
+      title: "Dashboard 1",
       url: 'admin/dashboard' ,
       icon: home, 
     },
@@ -104,7 +104,7 @@ export const useMenuStore = defineStore('menu', {
   ],
   [UserTypes.ADMINISTRATOR]: [
     {
-      title: "Dashboard",
+      title: "Dashboard 2",
       url: "/admin/dashboard",
       icon: home,
     },

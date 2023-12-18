@@ -22,7 +22,7 @@
 
 <script setup>
 import { defineProps, defineEmits, ref } from "vue";
-import { IonInput } from "@ionic/vue";
+/* import { IonInput } from "@ionic/vue"; */
 import { document as documentIcon } from "ionicons/icons";
 
 import usePhotoGallery from "@/composition/usePhotoGallery";

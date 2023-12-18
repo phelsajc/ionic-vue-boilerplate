@@ -11,6 +11,14 @@ http://ionicframework.com/docs/theming/ */
     --ion-color-primary-shade: #e95a5a;
     --ion-color-primary-tint: #f79898;
 
+    
+    --ion-color-blue: #3880ff;
+    --ion-color-blue-rgb: rgb(56,128,255);
+    --ion-color-blue-contrast: #fff;
+    --ion-color-blue-contrast-rgb: 255,255,255;
+    --ion-color-blue-shade: #3171e0;
+    --ion-color-blue-tint: #4c8dff;
+
     /** secondary **/
     --ion-color-secondary: #3dc2ff;
     --ion-color-secondary-rgb: 61, 194, 255;
@@ -74,4 +82,13 @@ http://ionicframework.com/docs/theming/ */
     --ion-color-light-contrast-rgb: 0, 0, 0;
     --ion-color-light-shade: #d7d8da;
     --ion-color-light-tint: #f5f6f9;
+}
+
+.ion-color-blue {
+	--ion-color-base: var(--ion-color-blue);
+	--ion-color-base-rgb: var(--ion-color-blue-rgb);
+	--ion-color-contrast: var(--ion-color-blue-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-blue-contrast-rgb);
+	--ion-color-shade: var(--ion-color-blue-shade);
+	--ion-color-tint: var(--ion-color-blue-tint);
 }

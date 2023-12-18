@@ -9,7 +9,6 @@
 </template>
 
 <script setup>
-import { IonImg } from "@ionic/vue";
 import { defineProps, ref, computed, useAttrs } from "vue";
 import { useGeneralStore } from "../store/general";
 

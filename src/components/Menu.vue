@@ -65,17 +65,6 @@ import {
   enter,
 } from "ionicons/icons";
 
-import {
-  IonContent,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonMenu,
-  IonMenuToggle,
-  IonHeader,
-  IonToolbar,
-} from "@ionic/vue";
 
 import { onBeforeUnmount, onMounted, ref, computed, reactive } from "vue";
 
