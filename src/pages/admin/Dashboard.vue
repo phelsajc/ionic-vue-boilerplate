@@ -62,7 +62,7 @@
         <ion-card-content>
           <ion-scroll scrollY="true">
             <ion-list>
-              <ion-item v-for="e in censusResults[0]" @click="redirect(e)">
+              <ion-item v-for="e in censusResults" @click="redirect(e)">
                 <ion-label>{{ e.station }}</ion-label>
               </ion-item>
             </ion-list>
@@ -74,12 +74,14 @@
 </template>
 
 <script>
-import { ref, onMounted, onIonViewDidEnter } from "vue";
+import { ref, onMounted, onIonViewDidEnter, computed } from "vue";
 import moment from "moment";
 import Stns from "@/api/getStations";
 import Census from "@/api/getCensus";
-
+import { defineStore } from 'pinia'
+import { stationStore } from '../../store/station';
 import { useRouter } from "vue-router";
+
 export default {
   setup() {
     const datef = ref();
@@ -89,7 +91,9 @@ export default {
     const stn_list = ref([]);
     const stnVal = ref([]);
     const stnInput = ref([]);
-    const censusResults = ref([]);
+    const stnStore = stationStore();
+    //const censusResults = stnStore.getStations;//ref(stnStore.getStations);
+    const censusResults = computed(() => stnStore.getStations)
 
     const form = ref({
       date: null,
@@ -112,11 +116,9 @@ export default {
         .then((response) => {
           /* timeline_header.value = response.data
         dismissLoading() */
-          console.log(response);
           response.data.data.forEach((element) => {
             stn_list.value.push(element.station);
           });
-          /* alert(stn_list) */
         })
         .catch((err) => {
           console.log(err);
@@ -131,36 +133,10 @@ export default {
 
     onMounted(async () => {
       await getResults();
+      console.log("stnStore.getStations")
     });
 
     const router = useRouter();
-    const b = [
-      {
-        station: "Nursery",
-        user: 3,
-        type: "support",
-      },
-      {
-        station: "Station 11",
-        user: 3,
-        type: "support",
-      },
-      {
-        station: "Pedia Ward",
-        user: 3,
-        type: "support",
-      },
-      {
-        station: "Station 1",
-        user: 3,
-        type: "support",
-      },
-      {
-        station: "Station 3",
-        user: 3,
-        type: "support",
-      },
-    ];
 
     function redirect(e) {
       router.push({
@@ -181,38 +157,32 @@ export default {
           stnVal.value.splice(index, 1);
           stnVal.value = [];
           await ev.detail.value.forEach((element) => {
-            console.log(element);
             stnVal.value.push(element);
           });
         }
       }
-
-      /* console.log(ev.detail.value[0]);
-      stnVal.value = [];
-      await ev.detail.value.forEach((element) => {
-        console.log(element);
-        stnVal.value.push(element);
-      }); */
     }
 
     function filter() {
       form.stnInput = stnVal.value;
-      // console.log(form.value.date[0])
       form.value.fdate = moment(form.value.date[0]).format("YYYY-MM-DD");
       form.value.tdate = moment(form.value.date[1]).format("YYYY-MM-DD");
-      //console.log(form.value)
-
       Census.list(form.value)
         .then((response) => {
-          //  console.log(response)
           total_reg_beds.value = response.data.totalRegularBed;
-          censusResults.value = [];
-          censusResults.value.push(response.data.data);
+          //censusResults.value = [];
+          //censusResults.value.push(response.data.data);
+          //stnStore.stations(censusResults.value);
+          stnStore.stations(response.data.data);
           /* response.data.data.forEach(element => {
-            console.log(element)
           }); */
-          console.log(response);
+          /* console.log(response);
           console.log(total_reg_beds.value);
+          console.log("stnStore.getStations 2")
+          console.log(stnStore.getStations) */
+          //censusResults.value.push(stnStore.getStations);
+          /* console.log(censusResults.value) */
+          console.log(stnStore.getStations)
         })
         .catch((err) => {
           console.log(err);

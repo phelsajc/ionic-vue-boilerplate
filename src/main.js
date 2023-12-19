@@ -90,6 +90,8 @@ import router from "./router";
 import BaseLayout from "./components/base/BaseLayout.vue";
 import ErrorMessage from "./components/ErrorMessage.vue";
 import Loading from "./components/Loading.vue";
+import { useRouter } from 'vue-router';
+
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/vue/css/core.css";
@@ -114,6 +116,8 @@ import HomeRoutesByUser from "./enums/HomeRoutesByUser";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
+const previouseUrl = useRouter.options.history.state.back;
+
 router.beforeEach(async (to, from, next) => {
   const user = await Preferences.get({ key: "user" });
   let _userId = 0;
@@ -129,6 +133,12 @@ router.beforeEach(async (to, from, next) => {
     next({ name: HomeRoutesByUser[_userType] });
     return;
   } */
+
+  if(to.fullPath === previouseUrl) {
+    next(false);
+  } else {
+    next();
+  }
 
   if (["login", "register"].includes(to.name) && user.value) {
     next({ name: HomeRoutesByUser[_userType] });

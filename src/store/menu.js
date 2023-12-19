@@ -20,7 +20,7 @@ export const useMenuStore = defineStore('menu', {
    * or not
    */
   publicItems: [
-    {
+    /* {
       title: "Contact 1",
       url: "/contact",
       icon: call,
@@ -39,16 +39,16 @@ export const useMenuStore = defineStore('menu', {
       title: "Home",
       url: "/home",
       icon: home,
-    },
-    {
+    }, */
+    /* {
       title: "Division",
       type: 2,
     },
     {
-      title: "Dashboard 1",
+      title: "Dashboard",
       url: 'admin/dashboard' ,
       icon: home, 
-    },
+    }, */
   ],
   /**
    * These items will only be shown when the user is not logged in
@@ -83,10 +83,19 @@ export const useMenuStore = defineStore('menu', {
    */
   needAuth: [
     {
+      title: "Dashboard",
+      url: 'admin/dashboard' ,
+      icon: home, 
+    },
+    {
+      title: "Division",
+      type: 2,
+    },
+    {
       title: "Logout 1",
       url: "/logout",
       icon: power,
-    },
+    }
   ],
   /**
    * These items will be shown according to the type of user
